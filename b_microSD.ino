@@ -4,7 +4,7 @@ char gpsbuf[MAXNMEALEN];
 
 #ifdef USE_GEOFENCE
 
-// currently waypoint (geofence) sentence is recognized
+// currently waypoint (geofence) sentence is only recognized
 #define GEO_X 0
 #define GEO_Y 1
 #define GEO_Z 2

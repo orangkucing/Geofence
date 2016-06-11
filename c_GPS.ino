@@ -7,59 +7,16 @@ void setupGPS()
 {
   digitalWrite(LED_YELLOW, LOW);
   pinMode(LED_YELLOW, OUTPUT);
-// Start GPS
-//#define GPSBAUDRATE 4800
-#define GPSBAUDRATE 9600
 
+// Start GPS
   GPS.begin(GPSBAUDRATE);
 
   // following line is unnecessary except Arduino Due
   Serial_begin(GPSBAUDRATE);
 
   while (GPS.read() <= 0)
-    ; // wait GPS to boot
-  
-// GPS specific settings
-
-/* MediaTek MT3339
-      TAIYO YUDEN GYSFDMAXB (9600 baud) */
-#if 0
-  GPS.print(F("$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0*28\r\n")); // enable GPGGA and GPZDA outputs once per second
-#endif
-
-/* SiRF
-      Position GPS-54 (9600 baud) */
-#if 0
-  GPS.print(F("$PSRF106,21*0F\r\n"));                 // set WGS-84 coordinate
-#endif
-
-/* SiRFstarIII
-      Aitendo GM-318 (4800 baud)
-   SiRF-IV
-      CanMore GMS6-CR6 (older unit: 4800 baud, newer unit: 9600 baud) */
-#if 0
-  GPS.print(F("$PSRF103,08,00,01,01*2D\r\n"));        // enable GPZDA output once per second
-#endif
-
-/* ST Microelectronics
-      CanMore GMS6-SR6 (9600 baud) */
-#if 0
-  GPS.print(F("$PSTMSETPAR,1201,0X01000001*71\r\n")); // enable GPGGA and GPZDA outputs only
-  GPS.print(F("$PSTMSAVEPAR*58\r\n"));                // save to flash memory
-#endif
-
-/* u-blox 6
-      Navisys GE-612T (9600 baud)
-      Aitendo NEO6M-ANT-4P (9600 baud) */
-#if 1
-  GPS.print(F("$PUBX,40,ZDA,1,1,1,0*45\r\n"));        // enable GPZDA output once per second
-  GPS.print(F("$PUBX,40,GLL,0,0,0,0,0,0*5C\r\n"));    // other statement outputs are turned off
-  GPS.print(F("$PUBX,40,VTG,0,0,0,0*5E\r\n"));
-  GPS.print(F("$PUBX,40,GSV,0,0,0,0*59\r\n"));
-  GPS.print(F("$PUBX,40,GSA,0,0,0,0*4E\r\n"));
-  GPS.print(F("$PUBX,40,RMC,0,0,0,0*47\r\n"));
-#endif
-
+    ; // wait GPS to boot 
+  GPSinit();
 }
 
 void __checkGPS()
