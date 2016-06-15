@@ -57,3 +57,11 @@ Current application can handle maximum of 64 geofences each of which is a convex
 For easy making of geofence configuration file, we prepare a dedicated webpage [Google Maps URL to GPWPL - NMEA waypoints](http://www.mewpro.cc/GPWPL.html).
 
 You can just copy URL in the address bar after you set pins to Google Maps, and paste it to the input box in the above webpage.
+
+## Note on USB Battery Auto Shutdown
+
+The unit draws very small amount of current (10mA - 20mA) from the USB battery attached.  It sometimes makes trouble for us that USB battery is automatically shutdown after every power on in 10 seconds or so.
+
+A workaround is to attach a dummy load between USB VBUS (+5V) and USB GND. Please also refer this post [USB Battery Bank Prevent Shut Down](https://forum.pjrc.com/threads/28624-USB-Battery-Bank-Prevent-Shut-Down) for more elegant solutions.
+
+Or using LiPo battery cells and a voltage boost converter to supply 5V solves the issue.
